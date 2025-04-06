@@ -1,0 +1,23 @@
+// This is a very basic example code:
+
+// // We take the pistol
+setWeapon(WEAPON_PISTOL) // Warning: costs 1 TP
+
+// // We get the nearest enemy
+var enemy = getNearestEnemy()
+var mp = getMP()
+var tp = getTP()
+
+
+while (true){
+    if (canUseWeapon(enemy) and tp >= 3) {
+        useWeapon(enemy)
+        tp-=3
+    } else if (mp != 0) {
+        if(tp == 0) {
+            moveAwayFrom(enemy)
+        } else {
+            moveToward(enemy)
+        } mp--
+    } else break
+}
