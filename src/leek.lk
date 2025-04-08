@@ -1,0 +1,51 @@
+class Leek {
+	/* Classe représentant un poirreau
+	*/
+
+	// Attributs :
+	id;			// ID
+	weapon; // Arme actuelle
+	pm;			// Points de mouvement restants
+	tp;		  // Points d'action restants
+
+	constructor(id=getEntity()) {
+		this.id = id;
+		this.pm = getMP(id);
+		this.tp = getTP(id);
+	}
+
+	getPos() {
+		return getCell(this.id)
+	}
+
+	isInRangeOf(entity) {
+		return (lineOfSight(entity.getPos(), this.getPos()) && getCellDistance(entity.getPos(), this.getPos()) <= getWeaponMaxRange(WEAPON_PISTOL)) //le weapon de entity
+	}
+
+	canAttack(entity) {
+		return (entity.isInRangeOf(this) && this.tp >= 3)
+	}
+
+	attack(entity) {
+		useWeapon(entity.id)
+    	this.tp-=3
+	}
+
+	canMove() {
+		return (this.pm != 0)
+	}
+
+	moveTo(entity) {
+		moveToward(entity.id, 1)
+    	this.pm--
+	}
+
+	moveAway(entity) {
+		moveAwayFrom(entity.id, 1)
+		this.pm--
+	}
+
+	canDoSomething(entity) {
+		return (canMove() || canAttack(entity))
+	}
+}

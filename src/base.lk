@@ -1,0 +1,19 @@
+include("./leek")
+
+Leek me = new Leek()
+Leek enemy = new Leek(getNearestEnemy())
+
+setWeapon(WEAPON_PISTOL)
+
+while (me.canDoSomething(enemy)){
+  //Si je peux attaquer : j'attaque
+  if (me.canAttack(enemy)) {
+    me.attack(enemy)
+  } else { //Si je ne peux pas attaquer
+    if (me.isInRangeOf(enemy)) { //Soit je suis à sa portée
+      me.moveAway(enemy)
+    } else { // Soit je ne suis pas à sa portée
+      me.moveTo(enemy)
+    }
+  }
+}
