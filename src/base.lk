@@ -1,4 +1,4 @@
-include("./leek")
+include("./leek.lk")
 
 Leek me = new Leek()
 Leek enemy = new Leek(getNearestEnemy())
