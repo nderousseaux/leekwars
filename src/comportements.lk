@@ -1,0 +1,22 @@
+/* Approche triviale du problème.
+- Je me déplace vers l'ennemi jusqu'à ce qu'il soit à portée de tir
+- Je tire sur lui
+- Je me met à couvert autant que possible 
+*/
+function shoot_first(me, enemy) {
+
+	// 1. Je me déplace vers l'ennemi jusqu'à ce qu'il soit à portée de tir
+	while (!me.isInRangeOf(enemy) && me.canMove()) {
+		me.moveTo(enemy,1)
+	}
+
+	// 2. Je tire sur lui
+	while (me.canAttack(enemy)) {
+		me.attack(enemy)
+	}
+
+	// 3. Je me met à couvert autant que possible
+	if (me.canMove()) {
+		me.moveToNearestCover(enemy)
+	}
+}

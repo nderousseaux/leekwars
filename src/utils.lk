@@ -1,0 +1,14 @@
+function getCellsAtDistance(init, distance) { 
+	var start_x = getCellX(init)
+	var start_y = getCellY(init)
+	var cells = []
+	for(var x = start_x - distance; x <= start_x + distance; x++) {
+		for(var y = start_y - distance; y <= start_y + distance; y++) {
+			var cell = getCellFromXY(x, y)
+			if (getPathLength(init, cell) <= distance) {
+				push(cells, cell)
+			}
+		}
+	}
+	return cells
+}

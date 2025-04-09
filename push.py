@@ -5,10 +5,14 @@ and copying everything from the local selected folder to the server
 
 import os
 import requests
-
-# Get .env variables
+import time
+import sys
 from dotenv import load_dotenv
 load_dotenv()
+
+TIME = 0.1	# Time to wait between requests
+
+
 URL = os.getenv("URL")
 LOCAL_FOLDER = os.getenv("LOCAL_FOLDER")
 USERNAME = os.getenv("USERNAME")
@@ -26,10 +30,12 @@ def irequest(token, method: str, url: str, **kwargs) -> requests.Response:
 	try:
 		response = requests.request(method, url, cookies=cookies, **kwargs)
 		response.raise_for_status()
+		time.sleep(TIME)
 		return response
 	except requests.RequestException as e:
 		print(f"Request failed: {e}")
-		return None
+		sys.exit(1)
+		
 
 def delete_all_remote(token) -> None:
 	"""

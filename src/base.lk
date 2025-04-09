@@ -1,19 +1,8 @@
 include("./leek.lk")
+include("./comportements.lk")
 
-Leek me = new Leek()
-Leek enemy = new Leek(getNearestEnemy())
+// Initial setup
+global Leek me = new Leek() // Instanciation de mon poireau
+global Leek enemy = new Leek(getNearestEnemy()) //Instanciation de l'ennemi le plus proche
 
-setWeapon(WEAPON_PISTOL)
-
-while (me.canDoSomething(enemy)){
-  //Si je peux attaquer : j'attaque
-  if (me.canAttack(enemy)) {
-    me.attack(enemy)
-  } else { //Si je ne peux pas attaquer
-    if (me.isInRangeOf(enemy)) { //Soit je suis à sa portée
-      me.moveAway(enemy)
-    } else { // Soit je ne suis pas à sa portée
-      me.moveTo(enemy)
-    }
-  }
-}
+shoot_first(me, enemy)

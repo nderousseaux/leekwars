@@ -1,0 +1,3 @@
+setWeapon(WEAPON_PISTOL)
+
+moveToward((getNextPlayer())
