@@ -1,0 +1,19 @@
+class Weapon {
+	/* Classe représentant une arme
+	*/
+
+	/******************************
+ 	* Attributs
+	******************************/
+	id;				// ID
+
+	constructor(id=WEAPON_PISTOL) {
+		this.id = id;
+	}
+
+	/******************************
+ 	* Accesseurs
+	*******************************/
+	getMaxRange() { return getWeaponMaxRange(this.id) }
+	getCost() { return getWeaponCost(this.id) }
+}

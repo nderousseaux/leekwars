@@ -1,0 +1,52 @@
+	/******************************
+ 	* Accesseurs
+	******************************/
+
+	getX() { return getCellX(this.getPosition())}
+	getY() { return getCellY(this.getPosition())}
+	getDis(entity) { return getCellDistance(this.getPosition(), entity.getPosition()) }
+
+	getCellsReachable() { return getCellsAtDistance(this.getPosition(), this.getMP()) }
+	getNearestCover(entity) {
+		var res = []
+		for(var distance = 0; distance <= 5; distance++) {
+			var cells = getCellsAtDistance(me.getPosition(), distance) // On commence par la case la plus proche, puis on augmente la distance.
+			for(var i : var cell in cells) {
+				if (this.isCover(entity, cell) && !isObstacle(cell)) {
+					return cell
+				}
+			}
+		}
+		return this.getPosition()
+	}
+
+	isInRangeOf(entity) { return entity.canSee(this) && entity.getDis(this) <= entity.weapon.getMaxRange() }
+	isCover(entity, cell) {
+		return (!lineOfSight(cell, entity.getPosition()) || getCellDistance(cell, entity.getPosition()) > entity.weapon.getMaxRange())
+	}
+		
+	canSee(entity) { return lineOfSight(this.getPosition(), entity.getPosition()) }
+	canMove() { return this.getMP() != 0 }
+	canAttack(entity) { return entity.isInRangeOf(this) && this.getTP() >= this.weapon.getCost() }
+	canDoSomething(entity) { return this.canMove() || this.canAttack(entity) }
+
+
+
+	moveToNearestCover(entity) { moveTowardCell(getNearestCover(entity)) }
+}
+
+
+// // 1. Je me déplace vers l'ennemi jusqu'à ce qu'il soit à portée de tir
+// while (!me.isInRangeOf(enemy) && me.canMove()) {
+// 	me.moveTo(enemy,1)
+// }
+
+// // 2. Je tire sur lui
+// while (me.canAttack(enemy)) {
+// 	me.attack(enemy)
+// }
+
+// // 3. Je me met à couvert autant que possible
+// if (me.canMove()) {
+// 	me.moveToNearestCover(enemy)
+// }

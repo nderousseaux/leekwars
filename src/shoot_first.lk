@@ -1,0 +1,13 @@
+/* L'algo shoot_first est une approche triviale du problème.
+- Je me déplace vers l'ennemi jusqu'à ce qu'il soit à portée de tir
+- Je tire sur lui
+- Je me met à couvert autant que possible 
+*/
+
+include("./class/leek.lk");
+include("./class/positions.lk");
+
+global Leek me = new Leek() // Mon poireau
+global Leek enemy = new Leek(getNearestEnemy()) //L'ennemi
+
+mark(Pos.getCellsAtDistance(me.getPosition(), 4), COLOR_BLUE)

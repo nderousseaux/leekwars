@@ -1,0 +1,19 @@
+class Pos {
+	/* Classe contenant les méthodes statiques pour les positions
+	*/
+
+	// Retourne la liste des cellules à une distance d de la cellule init.
+	// TODO: Optimiser
+	static getCellsAtDistance(cell, d) {
+		var cells = []
+		for(var x = getCellX(cell) - d; x <= getCellX(cell) + d; x++) {
+			for(var y = getCellY(cell) - d; y <= getCellY(cell) + d; y++) {
+				var c = getCellFromXY(x, y)
+				if (!isObstacle(c) && getPathLength(cell, c) <= d) {
+					push(cells, c)
+				}
+			}
+		}
+		return cells
+	}
+}

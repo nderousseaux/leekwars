@@ -1,0 +1,36 @@
+include("./weapon.lk")
+
+class Leek {
+	/* Classe représentant un poirreau
+	*/
+	id;
+	weapon;
+
+	constructor(id=getEntity(), weapon=WEAPON_PISTOL) {
+		this.id = id;
+		this.weapon = new Weapon(weapon);
+		if (this.isMe()) {
+			setWeapon(weapon);
+		}
+	}
+
+	/******************************
+		* Accesseurs
+ 	*******************************/
+	getPosition() { return getCell(this.id) } 
+	getTP() { return getTP(this.id) }
+	getMP() { return getMP(this.id) }
+	getTotalTP() { return getTotalTP(this.id) }
+	getTotalMP() { return getTotalMP(this.id) }
+
+	isMe() { return this.id == getEntity() }
+
+	/******************************
+ 	* Méthodes
+	******************************/
+	attack(entity) { useWeapon(entity.id) }
+	moveTo(entity, distance) { moveToward(entity.id, distance) }
+	moveTo(entity) { moveToward(entity.id) }
+	moveAway(entity, distance) { moveAwayFrom(entity.id, distance) }
+	moveAway(entity) { moveAwayFrom(entity.id) }
+}
