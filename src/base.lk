@@ -1,8 +1,0 @@
-include("./leek.lk")
-include("./comportements.lk")
-
-// Initial setup
-global Leek me = new Leek() // Instanciation de mon poireau
-global Leek enemy = new Leek(getNearestEnemy()) //Instanciation de l'ennemi le plus proche
-
-shoot_first(me, enemy)

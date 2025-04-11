@@ -81,29 +81,29 @@ def create_remote_folder(token, name: str, parent_id: int) -> int:
 	"""
 	Create a folder on server
 	"""
-	response = irequest(session, "POST", f"{URL}/ai-folder/new-name/", data={
+	response = irequest(token, "POST", f"{URL}/ai-folder/new-name/", data={
 		"name": name,
 		"folder_id": parent_id
 	})
 	return response.json()["id"]
 
-def create_remote_file(session, name: str, content: str, folder_id: int) -> None:
+def create_remote_file(token, name: str, content: str, folder_id: int) -> None:
 	"""
 	Create a file on server
 	"""
-	response = irequest(session, "POST", f"{URL}/ai/new-name/", data={
+	response = irequest(token, "POST", f"{URL}/ai/new-name/", data={
 		"name": name,
 		"version": 4,
 		"folder_id": folder_id
 	})
 	ai_id = response.json()["ai"]["id"]
 
-	irequest(session, "POST", f"{URL}/ai/save/", data={
+	irequest(token, "POST", f"{URL}/ai/save/", data={
 		"ai_id": ai_id,
 		"code": content
 	})
 
-	irequest(session, "PUT", f"{URL}/ai/strict", data={
+	irequest(token, "PUT", f"{URL}/ai/strict", data={
 		"ai_id": ai_id,
 		"strict": "true"
 	})
